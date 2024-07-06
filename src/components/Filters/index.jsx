@@ -3,13 +3,19 @@ import { useEffect, useState, useContext } from "react";
 import TodosContext from "../../context/TodosContext";
 
 const Filters = () =>{
-    const {filters, setFilters} = useContext(TodosContext);
+    const {filters, setFilters, setCurrentPage} = useContext(TodosContext);
 
     const [form] = Form.useForm();
 
     const onFinish = (values) => {
+        setCurrentPage(1);
         setFilters(values)
       };
+    
+    const onReset = () => {
+        form.resetFields();
+        setFilters(form.values);
+    };
 
     return (
         <div>
@@ -36,8 +42,8 @@ const Filters = () =>{
                         name="priority"
                     >
                         <Select
-                            placeholder= "All,High,Medium,Low"
-                            options={[{ value: 'LOW', label: 'Low' }, { value: 'MEDIUM', label: 'Medium' }, { value: 'HIGH', label: 'High' }, { value: undefined, label: 'All' }]}
+                            placeholder= "High, Medium, Low"
+                            options={[{ value: 'LOW', label: 'Low' }, { value: 'MEDIUM', label: 'Medium' }, { value: 'HIGH', label: 'High' }]}
                         >
                         </Select>
                     </Form.Item>
@@ -46,8 +52,8 @@ const Filters = () =>{
                         name="state"
                     >
                         <Select
-                            placeholder= "All, Done, Not Done"
-                            options={[{ value: 'true', label: 'Done' }, { value: 'false', label: 'Not Done' }, { value: undefined, label: 'All' }]}
+                            placeholder= "Done, Not Done"
+                            options={[{ value: 'true', label: 'Done' }, { value: 'false', label: 'Not Done' }]}
                         >
                         </Select>
                     </Form.Item>
@@ -55,7 +61,8 @@ const Filters = () =>{
                 <Col span={12}>
                     <Form.Item
                     >
-                        <Button htmlType="submit" className="card-filter-btn">Search</Button>
+                        <Button htmlType="submit" className="card-filter-btn">Search</Button>          
+                        <Button htmlType="button" onClick={onReset} type="link">Reset</Button>
                     </Form.Item>
                 </Col>
             </Row>

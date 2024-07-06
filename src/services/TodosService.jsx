@@ -2,16 +2,11 @@ import axios from "axios";
 
 const API_URL = 'http://localhost:9090/todos';
 
-const handleErrors=(error)=>{
-    if(error.response){
-        throw new Error(rerror.response.data.message);
-    }
-    console.error(error);
-}
 
-const getTodos = async (params) =>{
+const getTodos = async (params, page) =>{
+    const data = {...params, page}
     try{
-        const response = await axios.get(API_URL,{params});
+        const response = await axios.get(API_URL,{params:data});
         return response.data;
     }catch(error){
         console.error(error);
@@ -20,7 +15,7 @@ const getTodos = async (params) =>{
 
 const createTodo = async (todo) =>{
     try {
-        const response = await axios.post(API_URL,{todo});
+        const response = await axios.post(API_URL,todo);
         return response.data;
     } catch (error) {
         console.log(error);
@@ -29,14 +24,14 @@ const createTodo = async (todo) =>{
 
 const updateTodo = async (id,todo) =>{
     try {
-        const response = await axios.put(`${API_URL}/${id}`,{todo});
+        const response = await axios.put(`${API_URL}/${id}`,todo);
         return response.data;
     } catch (error) {
         console.log(error);
     }
 }
 
-const deleteTodo = async (id,todo) =>{
+const deleteTodo = async (id) =>{
     try {
         const response = await axios.post(`${API_URL}/${id}`);
         return response.data;

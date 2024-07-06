@@ -10,6 +10,8 @@ export const TodosContextProvider = ({ children }) => {
   const [reload,setReload] = useState(true);
   const [currentTodo,setCurrentTodo] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage,setTotalPage] = useState(1);
   const [filters,setFilters] = useState({
     text: null,
     priority:null,
@@ -18,8 +20,10 @@ export const TodosContextProvider = ({ children }) => {
 
 
   const fetchTodos = () => {
-    getTodos(filters).then(result=>{
-        setTodoList(result);
+    getTodos(filters,currentPage).then(result=>{
+        setTodoList(result.todosList);
+        setCurrentPage(result.currentPage);
+        setTotalPage(result.totalPages)
     }).catch(error =>{
         console.log(error);
     })
@@ -29,17 +33,16 @@ export const TodosContextProvider = ({ children }) => {
     createTodo(todo).then(result=>{
       console.log("Created successfuly");
       setReload(true);
-      setModalOpen(false);
     }).catch(error=>{
       console.log(error);
     })
   }
 
-  const editTodo = (updatedTodo) =>{
-    updateTodo(updatedTodo.id, updateTodo).then(result=>{
+  const editTodo = (id, updatedTodo) =>{
+    
+    updateTodo(id, updatedTodo).then(result=>{
       console.log("Updated successfuly");
       setReload(true);
-      setModalOpen(false);
     }).catch(error=>{
       console.log(error);
     })
@@ -76,18 +79,14 @@ export const TodosContextProvider = ({ children }) => {
   
   
   useEffect(() => {
-    fetchTodos(filters);
+    fetchTodos(filters, currentPage);
     setReload(false);
   }, [reload, filters]); 
-
-  const contextData = {
-    
-  };
 
   return (
     <TodosContext.Provider value={{todoList,setTodoList,
       reload,setReload, currentTodo, setCurrentTodo, modalOpen, setModalOpen, filters, setFilters,
-      addTodo,editTodo,deleteTodos,doTodo,undoTodo
+      addTodo,editTodo,deleteTodos,doTodo,undoTodo, currentPage, setCurrentPage, totalPage, setTotalPage
       }}>
       {children}
     </TodosContext.Provider>
