@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getTodos, createTodo,updateTodo, deleteTodo, markTodoAsDone, markTodoAsUndone} from "../services/TodosService";
+import { getTodos, createTodo,updateTodo, deleteTodo, markTodoAsDone, markTodoAsUndone, getMetrics} from "../services/TodosService";
 import { message } from "antd";
 
 
@@ -17,6 +17,20 @@ export const TodosContextProvider = ({ children }) => {
     priority:null,
     state:null
   });
+  const [metrics,setMetrics] = useState({
+    ALL:0.0,
+    HIGH:0.0,
+    MEDIUM:0.0,
+    LOW:0.0
+  })
+
+  const fetchMetrics = () =>{
+    getMetrics().then(result=>{
+      setMetrics(result);
+    }).catch(error =>{
+      console.log(error);
+  })
+  }
 
 
   const fetchTodos = () => {
@@ -80,13 +94,14 @@ export const TodosContextProvider = ({ children }) => {
   
   useEffect(() => {
     fetchTodos(filters, currentPage);
+    fetchMetrics();
     setReload(false);
   }, [reload, filters]); 
 
   return (
     <TodosContext.Provider value={{todoList,setTodoList,
       reload,setReload, currentTodo, setCurrentTodo, modalOpen, setModalOpen, filters, setFilters,
-      addTodo,editTodo,deleteTodos,doTodo,undoTodo, currentPage, setCurrentPage, totalPage, setTotalPage
+      addTodo,editTodo,deleteTodos,doTodo,undoTodo, currentPage, setCurrentPage, totalPage, setTotalPage, metrics
       }}>
       {children}
     </TodosContext.Provider>

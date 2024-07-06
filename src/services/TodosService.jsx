@@ -60,11 +60,21 @@ const markTodoAsUndone = async (id) =>{
     }
 }
 
+const getMetrics = async () =>{
+    try{
+        const response = await axios.get(`${API_URL}/metrics`);
+        return response.data;
+    }catch(error){
+        console.error(error);
+    }
+}
+
 export{
     getTodos,
     createTodo,
     updateTodo,
     deleteTodo,
     markTodoAsDone,
-    markTodoAsUndone
+    markTodoAsUndone,
+    getMetrics
 }

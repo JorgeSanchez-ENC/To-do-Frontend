@@ -15,6 +15,17 @@ const ToDoTable = () =>{
         setSelectedRowKeys(selected);
     },[todoList]);
 
+    const priorityHelper = (priority) =>{
+        switch(priority){
+            case "LOW" :
+                return 1;
+            case "MEDIUM" :
+                return 2;
+            case "HIGH" :
+                return 3;
+        }
+    }
+
     const columns = [
         {
             title: 'Name',
@@ -23,12 +34,18 @@ const ToDoTable = () =>{
         {
             title:'Priority',
             dataIndex: 'priority',
-            sorter: true,
+            sorter: {
+                compare: (a,b)=>priorityHelper(a.priority) - priorityHelper(b.priority),
+                multiple: 2
+            },
         },
         {
             title:'Due date',
             dataIndex: 'dueDate',
-            sorter: true,
+            sorter:{
+                compare:(a,b)=> dayjs(a.dueDate).unix() - dayjs(b.dueDate).unix(), 
+                multiple: 1
+            } ,
             render:(element,todo) =>(
                 <>
                     {

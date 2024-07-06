@@ -6,6 +6,7 @@ import ToDoTable from './components/ToDoBody/ToDoTable'
 import Filters from './components/Filters'
 import ModalForm from './components/ModalForm'
 import TodosContext from './context/TodosContext'
+import MetricsCard from './components/Metrics'
 
 
 
@@ -18,7 +19,7 @@ function App() {
       
       <ToDoTable></ToDoTable>
       <ModalForm></ModalForm>
-
+      <MetricsCard></MetricsCard>
     </TodosContextProvider>
 
   );
