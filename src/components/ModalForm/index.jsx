@@ -1,3 +1,4 @@
+import React from "react";
 import { Modal, Form, Input, Select, DatePicker } from 'antd';
 import { useContext, useEffect, useState } from 'react'; 
 import TodosContext from '../../context/TodosContext';
@@ -51,7 +52,7 @@ const ModalForm = () =>{
                     label={"To do text"}
                     rules={[{required: true, message: "Please add a to do text"}]}
                 >
-                    <Input></Input>
+                    <Input maxLength={120}></Input>
                 </Form.Item>
                 <Form.Item
                     name={"priority"}

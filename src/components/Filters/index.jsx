@@ -1,3 +1,4 @@
+import React from "react";
 import { Form, Button, Col, Row, Input, Select } from "antd";
 import { useEffect, useState, useContext } from "react";
 import TodosContext from "../../context/TodosContext";
@@ -31,7 +32,7 @@ const Filters = () =>{
                         name={"name"}
                     >
 
-                        <Input></Input>
+                        <Input maxLength={120}></Input>
                     </Form.Item>
                 </Col>
             </Row>
