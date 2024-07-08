@@ -7,23 +7,24 @@ const MetricsCard = () =>{
     const {metrics} = useContext(TodosContext);
 
     return(
-            <Row>
-            <Card>
-                <Statistic title="Average time to finish a task" value={metrics.ALL}></Statistic>
-            </Card>
-            <Space></Space>
-            <Card>
-                <Statistic title="Average time for Low tasks" value={metrics.LOW}></Statistic>
-            </Card>
-            <Space></Space>
-            <Card>
-                <Statistic title="Average time for Medium tasks" value={metrics.MEDIUM}></Statistic>
-            </Card>
-            <Space></Space>
-            <Card>
-                <Statistic title="Average time for HIGH tasks" value={metrics.HIGH}></Statistic>
-            </Card>
-            </Row>
+
+            <Space>
+                <Row>
+                    <Card>
+                        <Statistic title="Average time to finish a task" value={metrics.ALL + " Minutes "}></Statistic>
+                    </Card>
+                    <Card>
+                        <Statistic title="Average time for Low tasks" value={metrics.LOW + " Minutes "}></Statistic>
+                    </Card>
+                    <Card>
+                        <Statistic title="Average time for Medium tasks" value={metrics.MEDIUM + " Minutes "}></Statistic>
+                    </Card>
+                    <Card>
+                        <Statistic title="Average time for HIGH tasks" value={metrics.HIGH + " Minutes "}></Statistic>
+                    </Card>
+                </Row>
+            </Space>
+
     );
 
 }
