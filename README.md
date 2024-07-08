@@ -36,7 +36,7 @@ Test the application:
 npm test
 ```
 
-##Features
+## Features
 You can find the following features on the app:
 
 - **To do creation**. You can create new To dos, which area going to be displayed in the interactive table.
