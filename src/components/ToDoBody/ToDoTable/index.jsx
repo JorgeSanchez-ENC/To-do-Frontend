@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Button, Popconfirm } from "antd";
+import { Table, Button, Popconfirm, Row, Space } from "antd";
 import { useContext, useEffect, useState } from 'react'; 
 import TodosContext from '../../../context/TodosContext';
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
@@ -115,25 +115,31 @@ const ToDoTable = () =>{
 
     return(
         <>
-        <Button onClick={()=>setModalOpen(true)} type="primary">New To do</Button>
-        <Table 
-        columns={columns}
-        rowKey={"id"}
-        rowSelection={
-            rowSelection
-        } 
-        pagination={{
-            defaultPageSize : 10,
-            total: totalPage*10,
-            current: currentPage,
-            onChange: (page,pageSize) =>{
-                setReload(true);
-                setCurrentPage(page);
-            }
+        <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
+            <Row>
+                <Button onClick={()=>setModalOpen(true)} type="primary">New To do</Button>
+            </Row>
+            
+            <Table 
+            columns={columns}
+            rowKey={"id"}
+            rowSelection={
+                rowSelection
+            } 
+            pagination={{
+                defaultPageSize : 10,
+                total: totalPage*10,
+                current: currentPage,
+                onChange: (page,pageSize) =>{
+                    setReload(true);
+                    setCurrentPage(page);
+                }
 
-        }}
-        dataSource={todoList} 
-        ></Table>
+            }}
+            dataSource={todoList} 
+            ></Table>
+        </Space>
+        
         
         </>
 

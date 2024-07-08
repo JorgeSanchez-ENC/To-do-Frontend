@@ -7,16 +7,16 @@ import dayjs from 'dayjs';
 const ModalForm = () =>{
     const{ addTodo, editTodo, currentTodo, setCurrentTodo, modalOpen, setModalOpen} = useContext(TodosContext);
     const [form] = Form.useForm();
-    const [editableTodo, setEditableTodo] = useState(null);
 
     useEffect(()=>{
         if(currentTodo){
-            setEditableTodo(currentTodo);
-            form.setFieldValue({
+            form.setFieldsValue(
                 currentTodo
-            })
+            )
+        }else{
+            form.resetFields();
         }
-    },[currentTodo,form], modalOpen);
+    },[currentTodo, modalOpen]);
 
     const handleOk = () =>{
         form.validateFields().then(values=>{
@@ -25,17 +25,19 @@ const ModalForm = () =>{
             }else{
                 addTodo({...values, done:false});
             }
-            setModalOpen(false);
-            setEditableTodo(null);
             setCurrentTodo(null);
+            setModalOpen(false);
+
+            form.resetFields();
         }).catch(error=>{
             console.log(error);
         })
     }
 
     const handleCancel=()=>{
-        setModalOpen(false);
         setCurrentTodo(null);
+        setModalOpen(false);
+ 
         form.resetFields();
     }
 
@@ -46,7 +48,7 @@ const ModalForm = () =>{
             onOk={handleOk}
             onCancel={handleCancel}
         > 
-            <Form form={form} layout='vertical' initialValues={editableTodo}> 
+            <Form form={form} layout='vertical'> 
                 <Form.Item
                     name={"text"}
                     label={"To do text"}
