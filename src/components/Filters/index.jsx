@@ -29,7 +29,7 @@ const Filters = () =>{
                 <Col span={24}>
                     <Form.Item
                         label="Name"
-                        name={"name"}
+                        name={"text"}
                     >
 
                         <Input maxLength={120}></Input>
