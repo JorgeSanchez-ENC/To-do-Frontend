@@ -1,8 +1,47 @@
-# React + Vite
+# To do application Frontend
+The frontend of a project intended for tasks administration, developed using react and node, ant desingn system, React Context and Jest.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Geting started
+1. Clone the repository:
+   
+```bash
+git clone https://github.com/JorgeSanchez-Encora/To-do-Frontend.git
+```
 
-Currently, two official plugins are available:
+2. Change to the project directory:
+   
+```bash
+cd To-do-Frontend
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+3. Install dependencies
+```bash
+npm install
+```
+
+
+## Runing the app
+Run the application:
+
+```bash
+npm run dev
+```
+
+The application runs on port 8080
+
+## Test the app
+Test the application:
+
+```bash
+npm test
+```
+
+##Features
+You can find the following features on the app:
+
+- **To do creation**. You can create new To dos, which area going to be displayed in the interactive table.
+- **To do edition**. Any created To do can be edited to modify its name, due date and priority.
+- **To do filtering**. The filter form can change the to dos that are being shown, you can select to filter using a name, a priority and/or a state.
+- **To do sorting**. The table can be sorted using the due date, the priority, or both!
+- **Pagination**. Only ten to dos will be shown per page.
+- **Metrics**. You can see how many minutes you spend in average to finish a task, in general and gruped by priority!
